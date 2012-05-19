@@ -75,6 +75,9 @@
     Flow.prototype.drawItem = function(coords, item, paper) {
       var c, connections, i, item_rect, text, _i, _len;
       item_rect = paper.rect(coords.start_x, coords.start_y, coords.box_w, coords.box_h);
+      if (item.colour) {
+        item_rect.attr("fill", item.colour);
+      }
       connections = item.connections;
       text = paper.text(coords.getBoxCenterX(), coords.getBoxCenterY(), item.name);
       if (connections.length > 0) {

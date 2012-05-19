@@ -18,6 +18,7 @@ class Flow
         
     drawItem: (coords, item, paper) ->
         item_rect = paper.rect coords.start_x, coords.start_y, coords.box_w, coords.box_h
+        if item.colour then item_rect.attr "fill", item.colour
         connections = item.connections
         
         text = paper.text coords.getBoxCenterX(), coords.getBoxCenterY(), item.name
