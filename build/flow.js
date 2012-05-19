@@ -20,6 +20,10 @@
       return this.start_y + (this.box_h / 2);
     };
 
+    Coords.prototype.getConnectionDrawX = function() {
+      return this.box_distance - this.box_w;
+    };
+
     Coords.prototype.getBoxCenterX = function() {
       return this.start_x + (this.box_w / 2);
     };
@@ -43,59 +47,53 @@
       this.html_id = html_id;
       this.width = width;
       this.height = height;
-      this.paper = Raphael.paper(this.html_id, this.width, this.height);
+      this.paper = Raphael(this.html_id, this.width, this.height);
+      this.data = new Array;
     }
 
     Flow.prototype.addData = function(data) {
       var d, _i, _len, _results;
-      if (data === Array) {
-        _results = [];
-        for (_i = 0, _len = data.length; _i < _len; _i++) {
-          d = data[_i];
-          _results.push(this.data.push(d));
-        }
-        return _results;
-      } else if (data === object) {
-        return this.data.push(data);
-      } else {
-        throw new {
-          "error": "parameter is not array or object."
-        };
-      }
-    };
-
-    Flow.prototype.draw = function() {
-      var coords, i, item, _i, _len, _ref, _results;
-      coords = new Coords(50, 50, 80, 80, 150);
-      _ref = this.data;
       _results = [];
-      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-        item = _ref[i];
-        this.drawItem(coords, item, this.paper);
-        _results.push(coords.recalculate(i));
+      for (_i = 0, _len = data.length; _i < _len; _i++) {
+        d = data[_i];
+        _results.push(this.data.push(d));
       }
       return _results;
     };
 
+    Flow.prototype.draw = function() {
+      var coords, i, item, _i, _len, _ref;
+      coords = new Coords(50, 50, 80, 80, 150);
+      _ref = this.data;
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        item = _ref[i];
+        this.drawItem(coords, item, this.paper);
+        coords.recalculate(i);
+      }
+    };
+
     Flow.prototype.drawItem = function(coords, item, paper) {
-      var c, connections, i, item_rect, text, _i, _len, _results;
+      var c, connections, i, item_rect, text, _i, _len;
       item_rect = paper.rect(coords.start_x, coords.start_y, coords.box_w, coords.box_h);
       connections = item.connections;
       text = paper.text(coords.getBoxCenterX(), coords.getBoxCenterY(), item.name);
       if (connections.length > 0) {
-        paper.path("M " + (coords.getConnectionStartX()) + " " + (coords.getConnectionStartY()) + " l " + (coords.getConnectionDrawX()) + " 0");
+        paper.path("M " + (coords.getConnectionStartX()) + " " + (coords.getConnectionStartY()) + " l " + (coords.getConnectionDrawX()) + " 0").attr({
+          "arrow-end": "classic-wide-long",
+          "stroke-width": 2
+        });
       }
-      _results = [];
       for (i = _i = 0, _len = connections.length; _i < _len; i = ++_i) {
         c = connections[i];
         coords.recalculate(i);
-        _results.push(this.drawitem(coords, c, paper));
+        this.drawItem(coords, c, paper);
       }
-      return _results;
     };
 
     return Flow;
 
   })();
+
+  window.Flow = Flow;
 
 }).call(this);

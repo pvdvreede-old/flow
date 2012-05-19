@@ -8,7 +8,10 @@ class Coords
         
     getConnectionStartY: () ->
         @start_y + (@box_h / 2)
-        
+    
+    getConnectionDrawX: () ->
+        @box_distance - @box_w
+    
     getBoxCenterX: () ->
         @start_x + (@box_w / 2)
         

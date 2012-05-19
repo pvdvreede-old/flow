@@ -1,0 +1,105 @@
+<! DOCTYPE html !>
+<html>
+<head>
+<title>Message flow</title>
+<script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js"></script>
+<script type="text/javascript" src="../build/flow.js"></script>
+</head>
+<body>
+
+<div id="paper"></div>
+
+<script type="text/javascript">
+    // test item to pass in for rendering
+    var items = [{
+    "name": "Payload1 in",
+    "object": "Payload",
+    "type": "XML",
+    "connections": [{
+        "name": "Map Name1",
+        "object": "Map",
+        "type": "Xslt",
+        "connections": [{
+            "name": "Payload1 out",
+            "object": "Payload",
+            "type": "EDIFACT",
+            "connections": [{
+                "name": "Transmission1 out",
+                "object": "Payload",
+                "type": "EDIFACT",
+                "connections": []
+            },
+            {
+                "name": "Transmission2 out",
+                "object": "Payload",
+                "type": "EDIFACT",
+                "connections": []
+                }]
+        }]
+    }, {
+        "name": "Map Name",
+        "object": "Map",
+        "type": "Xslt",
+        "connections": [{
+            "name": "Payload out Name",
+            "object": "Payload",
+            "type": "EDIFACT",
+            "connections": [{
+                "name": "Payload out Name",
+                "object": "Payload",
+                "type": "EDIFACT",
+                "connections": []
+            }]
+        }]
+    }]
+    }, {
+        "name": "Payload name",
+        "object": "Payload",
+        "type": "XML",
+        "connections": [{
+            "name": "Map Name",
+            "object": "Map",
+            "type": "Xslt",
+            "connections": [{
+                "name": "Payload out Name",
+                "object": "Payload",
+                "type": "EDIFACT",
+                "connections": [{
+                    "name": "Payload out Name",
+                    "object": "Payload",
+                    "type": "EDIFACT",
+                    "connections": []
+                }]
+            }]
+        }, {
+            "name": "Map Name",
+            "object": "Map",
+            "type": "Xslt",
+            "connections": [{
+                "name": "Payload out Name",
+                "object": "Payload",
+                "type": "EDIFACT",
+                "connections": [{
+                    "name": "Payload out Name",
+                    "object": "Payload",
+                    "type": "EDIFACT",
+                    "connections": []
+                }]
+            }]
+        }]
+    }
+    
+    ];
+
+    window.onload = function() {
+        var flow = new Flow("paper", 900, 900);
+        
+        flow.addData(items);
+        
+        flow.draw();
+    };
+
+</script>
+
+</body>
+</html>

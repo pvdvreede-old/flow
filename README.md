@@ -6,7 +6,7 @@ Flow can be used to create an SVG diagram showing the flow of objects from one p
 
 #### Usage
 
-Flow uses RaphaelJS to build the diagram so Raphael must be added to the webpage. Use the following to add the RaphaelJS file to your website, or you can download the file and serve it from your own server:
+Flow uses [RaphaelJS](http://raphaeljs.com/) to build the diagram so Raphael must be added to the webpage. Use the following to add the RaphaelJS file to your website, or you can download the file and serve it from your own server:
 
     <script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/raw/master/raphael-min.js"></script>
 
