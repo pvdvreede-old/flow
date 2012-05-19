@@ -14,9 +14,10 @@ class Flow
             throw new "error" : "parameter is not array or object."
             
     draw: () ->
-        for item in @data
-            coords = new Coords 50, 50, 80, 80, 150
+        coords = new Coords 50, 50, 80, 80, 150
+        for item, i in @data
             @drawItem coords, item, @paper
+            coords.recalculate i
         
     drawItem: (coords, item, paper) ->
         item_rect = paper.rect coords.start_x, coords.start_y, coords.box_w, coords.box_h
