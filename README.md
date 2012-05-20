@@ -36,6 +36,7 @@ Flow uses an array of custom objects that may contain more of the same to build 
     };
     
 An example of a single flow passing through three objects would be:
+    
     var flow_objects = [{
         name : "Item 1",
         colour: "blue",
